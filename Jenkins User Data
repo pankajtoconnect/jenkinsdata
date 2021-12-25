@@ -1,9 +1,33 @@
 #!/bin/bash
-sudo yum remove java-1.7.0-openjdk -y 
-sudo yum update -y
-sudo wget -O /etc/yum.repos.d/jenkins.repo https://pkg.jenkins.io/redhat-stable/jenkins.repo
-sudo rpm --import https://pkg.jenkins.io/redhat-stable/jenkins.io.key
-sudo yum install jenkins java-1.8.0-openjdk-devel -y
-sudo systemctl start jenkins.service
-sudo systemctl enable jenkins.service
+sudo su
+wget -O /etc/yum.repos.d/jenkins.repo https://pkg.jenkins.io/redhat-stable/jenkins.repo
+rpm --import https://pkg.jenkins.io/redhat-stable/jenkins.io.key
+amazon-linux-extras install epel -y
+amazon-linux-extras install java-openjdk11 -y
+yum install jenkins -y
+systemctl start jenkins
+systemctl enable jenkins
 
+
+
+export PATH
+JAVA_HOME=/usr/lib/jvm/java-11-openjdk-11.0.12.0.7-0.amzn2.0.2.x86_64
+M2_HOME=/opt/maven/apache-maven-3.8.3
+M2=$M2_HOME/bin
+PATH=$PATH:$JAVA_HOME:$M2_HOME:$M2:$HOME/bin
+cd /opt
+mkdir maven
+wget https://dlcdn.apache.org/maven/maven-3/3.8.3/binaries/apache-maven-3.8.3-bin.tar.gz
+tar -xvf apache-maven-3.8.3-bin.tar.gz
+mv apache-maven-3.8.3 maven
+
+
+
+JAVA PATH SET in Ubuntu
+export PATH
+JAVA_HOME=/usr/lib/jvm/java-11-openjdk-amd64/
+M2_HOME=/opt/maven/
+M2=$M2_HOME/bin
+PATH=$PATH:$JAVA_HOME:$M2_HOME:$M2:$HOME/bin
+
+  
